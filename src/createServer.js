@@ -77,23 +77,19 @@ function createServer() {
     }
 
     if (categories) {
-      // Ensure categories is always an array
-      // Split by comma if it's a string query parameter
       where.category = Array.isArray(categories)
         ? categories
         : categories.split(',');
-    } // Initialize spentAt condition if either from or to is provided
+    }
 
     if (from || to) {
       where.spentAt = {};
 
       if (from) {
-        // Use Sequelize Operators for >=
         where.spentAt[Op.gte] = new Date(from);
       }
 
       if (to) {
-        // Use Sequelize Operators for <=
         where.spentAt[Op.lte] = new Date(to);
       }
     }
